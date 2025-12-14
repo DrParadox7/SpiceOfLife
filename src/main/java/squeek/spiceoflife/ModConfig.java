@@ -87,6 +87,9 @@ public class ModConfig implements IPackable, IPacketProcessor {
     private static final String FOOD_HISTORY_LENGTH_COMMENT = "The maximum amount of eaten foods stored in the history at a time";
     private static final String FOOD_HISTORY_PERSISTS_THROUGH_DEATH_NAME = "food.history.persists.through.death";
     private static final boolean FOOD_HISTORY_PERSISTS_THROUGH_DEATH_DEFAULT = false;
+    private static final String FOOD_HISTORY_COUNTS_DISTINCTLY_NAME = "food.history.counts.distinctly";
+    private static final String FOOD_HISTORY_COUNTS_DISTINCTLY_COMMENT = "If true, eating identical foods will be merged into the same entry";
+    private static final boolean FOOD_HISTORY_COUNTS_DISTINCTLY_DEFAULT = false;
     private static final String FOOD_HISTORY_PERSISTS_THROUGH_DEATH_COMMENT = "If true, food history will not get reset after every death";
     private static final String FOOD_EATEN_THRESHOLD_NAME = "new.player.food.eaten.threshold";
     private static final String FOOD_EATEN_THRESHOLD_COMMENT = "The number of times a new player (by World) needs to eat before this mod has any effect";
@@ -203,6 +206,7 @@ public class ModConfig implements IPackable, IPacketProcessor {
     public static int FOOD_HISTORY_LENGTH = ModConfig.FOOD_HISTORY_LENGTH_DEFAULT;
     private static final int FOOD_EATEN_THRESHOLD_DEFAULT = ModConfig.FOOD_HISTORY_LENGTH / 2;
     public static boolean FOOD_HISTORY_PERSISTS_THROUGH_DEATH = ModConfig.FOOD_HISTORY_PERSISTS_THROUGH_DEATH_DEFAULT;
+    public static boolean FOOD_HISTORY_COUNTS_DISTINCTLY = ModConfig.FOOD_HISTORY_COUNTS_DISTINCTLY_DEFAULT;
     public static int FOOD_EATEN_THRESHOLD = ModConfig.FOOD_EATEN_THRESHOLD_DEFAULT;
     public static boolean USE_FOOD_GROUPS_AS_WHITELISTS = ModConfig.USE_FOOD_GROUPS_AS_WHITELISTS_DEFAULT;
     public static RoundingMode FOOD_HUNGER_ROUNDING_MODE = null;
@@ -318,6 +322,13 @@ public class ModConfig implements IPackable, IPacketProcessor {
                 FOOD_HISTORY_PERSISTS_THROUGH_DEATH_DEFAULT,
                 FOOD_HISTORY_PERSISTS_THROUGH_DEATH_COMMENT)
             .getBoolean(FOOD_HISTORY_PERSISTS_THROUGH_DEATH_DEFAULT);
+        FOOD_HISTORY_COUNTS_DISTINCTLY = config
+                .get(
+                        CATEGORY_SERVER,
+                        FOOD_HISTORY_COUNTS_DISTINCTLY_NAME,
+                        FOOD_HISTORY_COUNTS_DISTINCTLY_DEFAULT,
+                        FOOD_HISTORY_COUNTS_DISTINCTLY_COMMENT)
+                .getBoolean(FOOD_HISTORY_COUNTS_DISTINCTLY_DEFAULT);
         FOOD_EATEN_THRESHOLD = config
             .get(CATEGORY_SERVER, FOOD_EATEN_THRESHOLD_NAME, FOOD_EATEN_THRESHOLD_DEFAULT, FOOD_EATEN_THRESHOLD_COMMENT)
             .getInt(FOOD_EATEN_THRESHOLD_DEFAULT);

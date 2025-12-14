@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import squeek.applecore.api.food.FoodValues;
+import squeek.spiceoflife.ModConfig;
 import squeek.spiceoflife.foodtracker.FoodEaten;
 import squeek.spiceoflife.helpers.ColorHelper;
 
@@ -60,6 +61,7 @@ public class WidgetFoodEaten extends Gui {
     }
 
     public void draw(int x, int y) {
+        String count = !ModConfig.FOOD_HISTORY_COUNTS_DISTINCTLY ? "" : " x " + foodEaten.itemStack.stackSize;
         x += PADDING_LEFT;
 
         if (foodEaten.itemStack == null) return;
@@ -72,7 +74,7 @@ public class WidgetFoodEaten extends Gui {
         if (defaultFoodValues == null) return;
 
         mc.fontRenderer.drawString(
-            getDisplayName(),
+            getDisplayName() + count,
             x,
             y,
             ColorHelper.getRelativeColorInt(foodEaten.foodValues.hunger, 0, defaultFoodValues.hunger));

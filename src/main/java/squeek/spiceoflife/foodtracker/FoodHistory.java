@@ -257,6 +257,18 @@ public class FoodHistory implements IExtendedEntityProperties, ISaveable, IPacka
     }
 
     public void addFoodRecent(FoodEaten foodEaten) {
+        if(ModConfig.FOOD_HISTORY_COUNTS_DISTINCTLY)
+            for (FoodEaten foodRecent : recentHistory) {
+                if (foodEaten.equals(foodRecent)){
+                    foodRecent.itemStack.stackSize++;
+
+                    recentHistory.remove(foodRecent);
+                    recentHistory.add(foodRecent);
+                    return;
+                }
+            }
+
+        foodEaten.itemStack.stackSize = 1;
         recentHistory.add(foodEaten);
     }
 
